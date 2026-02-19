@@ -1,0 +1,16 @@
+venv/
+__pycache__/
+*.pyc
+*.pt
+*.pth
+*.onnx
+uploads/
+output/
+logs/
+runs/
+reports/output/
+data/raw/
+.env
+.DS_Store
+Thumbs.db
+*.egg-info/

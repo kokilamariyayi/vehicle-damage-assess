@@ -1,0 +1,99 @@
+# configs/config.yaml
+# Vehicle Damage Assessment System — Master Configuration
+
+# ── Models ────────────────────────────────────────────────────────────────────
+models:
+  detector: "yolov8x.pt"                    # Damage localization (YOLOv8)
+  custom_detector: null                      # Path to fine-tuned detector
+  classifier: "efficientnet_b4"             # Severity classifier backbone
+  classifier_weights: null                   # Fine-tuned classifier weights
+  input_size: 640
+  classifier_input_size: 380
+
+# ── Detection Classes ─────────────────────────────────────────────────────────
+damage_classes:
+  - "dent"           # 0
+  - "scratch"        # 1
+  - "crack"          # 2
+  - "shattered_glass"# 3
+  - "flat_tire"      # 4
+  - "missing_part"   # 5
+  - "deformation"    # 6
+  - "rust"           # 7
+
+vehicle_parts:
+  - "bumper_front"
+  - "bumper_rear"
+  - "door_front_left"
+  - "door_front_right"
+  - "door_rear_left"
+  - "door_rear_right"
+  - "hood"
+  - "trunk"
+  - "fender_front_left"
+  - "fender_front_right"
+  - "windshield"
+  - "headlight"
+  - "taillight"
+  - "roof"
+  - "side_mirror"
+
+severity_levels:
+  - "minor"          # 0
+  - "moderate"       # 1
+  - "severe"         # 2
+
+# ── Inference ─────────────────────────────────────────────────────────────────
+inference:
+  confidence_threshold: 0.40
+  iou_threshold: 0.45
+  device: "cpu"           # "cuda" or "cpu"
+  half_precision: false
+
+# ── Repair Cost Table (USD) ───────────────────────────────────────────────────
+# Format: part -> damage_type -> severity -> [min, max] cost
+repair_costs:
+  bumper_front:
+    dent:     {minor: [150, 400],  moderate: [400, 900],   severe: [900, 2000]}
+    scratch:  {minor: [100, 300],  moderate: [300, 700],   severe: [700, 1500]}
+    crack:    {minor: [200, 500],  moderate: [500, 1200],  severe: [1200, 2500]}
+  bumper_rear:
+    dent:     {minor: [150, 400],  moderate: [400, 900],   severe: [900, 2000]}
+    scratch:  {minor: [100, 300],  moderate: [300, 700],   severe: [700, 1500]}
+    crack:    {minor: [200, 500],  moderate: [500, 1200],  severe: [1200, 2500]}
+  door_front_left:
+    dent:     {minor: [200, 500],  moderate: [500, 1200],  severe: [1200, 3000]}
+    scratch:  {minor: [150, 400],  moderate: [400, 900],   severe: [900, 2000]}
+    crack:    {minor: [300, 700],  moderate: [700, 1800],  severe: [1800, 4000]}
+  door_front_right:
+    dent:     {minor: [200, 500],  moderate: [500, 1200],  severe: [1200, 3000]}
+    scratch:  {minor: [150, 400],  moderate: [400, 900],   severe: [900, 2000]}
+    crack:    {minor: [300, 700],  moderate: [700, 1800],  severe: [1800, 4000]}
+  hood:
+    dent:     {minor: [300, 700],  moderate: [700, 1500],  severe: [1500, 4000]}
+    scratch:  {minor: [200, 500],  moderate: [500, 1000],  severe: [1000, 2500]}
+    crack:    {minor: [400, 900],  moderate: [900, 2000],  severe: [2000, 5000]}
+  windshield:
+    crack:    {minor: [200, 400],  moderate: [400, 800],   severe: [800, 1500]}
+    shattered_glass: {minor: [500, 900], moderate: [900, 1500], severe: [1500, 3000]}
+  headlight:
+    crack:    {minor: [100, 300],  moderate: [300, 700],   severe: [700, 1500]}
+    shattered_glass: {minor: [200, 500], moderate: [500, 1000], severe: [1000, 2000]}
+  default:
+    dent:     {minor: [100, 300],  moderate: [300, 800],   severe: [800, 2000]}
+    scratch:  {minor: [80, 250],   moderate: [250, 600],   severe: [600, 1500]}
+    crack:    {minor: [150, 400],  moderate: [400, 1000],  severe: [1000, 2500]}
+    default:  {minor: [100, 300],  moderate: [300, 800],   severe: [800, 2000]}
+
+# ── Report ────────────────────────────────────────────────────────────────────
+report:
+  company_name: "AutoAssess AI"
+  output_dir: "reports/output/"
+  include_cost_estimate: true
+  include_annotated_image: true
+  currency: "USD"
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+logging:
+  level: "INFO"
+  log_file: "logs/system.log"
