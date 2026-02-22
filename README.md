@@ -171,11 +171,14 @@ python models/train.py --task classifier --data data/severity/ --epochs 50
 ```
 
 ---
+## 📧 Contact
 
-## 👤 Author
+Feel free to connect for collaboration, internships, 
+or project discussions.
 
-**Your Name** — B.Tech CS | ITT Internship Project
-[GitHub](https://github.com/YOUR_USERNAME) • [LinkedIn](https://linkedin.com/in/YOUR_PROFILE)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/kokila-m-ai-ds/)
+[![Email](https://img.shields.io/badge/Email-Contact-red)](mailto:kokilakoki3376@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black)](https://github.com/kokilamariyayi)
 
 ---
 <div align="center">⭐ Star this repo if it helped you!</div>
